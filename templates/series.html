@@ -1,0 +1,33 @@
+{% import "post_info.html" as macros %}
+{% extends "site.html" %}
+{% block content %}
+{% set part1 = posts | first %}
+<article class="series">
+  <header>
+    <h1><a href="{{url}}">{{title}}</a></h1>
+  </header>
+
+  <figure>
+    <img src="{{img}}" />
+  </figure>
+
+  <div class="series-description">{{description}}</div>
+  {% if post_note %}
+  <div class="post_note">{{post_note}}</div>
+  {% endif %}
+  <div class="read-part-1">
+    {% if part1 %}
+    <a href="{{ part1.url }}">Read part 1</a>
+    {% else %} No posts in series {% endif %}
+  </div>
+
+  {{ macros::post_items(posts=posts) }}
+
+  <footer class="series-footer">
+    <div>
+      {% if completed %} This series is completed. {% else %} This series is
+      ongoing. {% endif %}
+    </div>
+  </footer>
+</article>
+{% endblock content %}

@@ -1,0 +1,145 @@
+@use "../global/fonts" as *;
+@use "../global/font_size" as *;
+@use "../components/system" as *;
+
+.charts-wrapper > svg {
+  @include overflow-bleed;
+  flex: 1;
+  width: 100%;
+}
+
+.blog-stats-graph {
+  @include overflow-bleed;
+  /* background-color: var(--melange_a_float); */
+
+  .labels.x-labels {
+    text-anchor: middle;
+  }
+
+  .labels.y-labels {
+    text-anchor: end;
+  }
+  .y-labels .label-title {
+    text-anchor: end;
+  }
+
+  .grid {
+    stroke: var(--melange_a_ui);
+    stroke-dasharray: 0;
+    stroke-width: 1;
+  }
+
+  .labels {
+    @include font-size("s");
+    @include sans-serif;
+    fill: var(--color-text);
+  }
+
+  .label-title {
+    font-weight: bold;
+    fill: var(--color-text);
+  }
+
+  .data-set-label {
+    @include font-size("xs");
+  }
+
+  // Warm (red, yellow, magenta)
+  .data-set.crypto {
+    &,
+    &:hover {
+      fill: var(--melange_b_yellow);
+    }
+  }
+  .data-set.programming {
+    &,
+    &:hover {
+      fill: var(--melange_b_red);
+    }
+  }
+  .data-set.printing {
+    &,
+    &:hover {
+      fill: var(--melange_c_magenta);
+    }
+  }
+  .data-set.life {
+    &,
+    &:hover {
+      fill: var(--melange_c_yellow);
+    }
+  }
+  .data-set.linux {
+    &,
+    &:hover {
+      fill: var(--melange_b_magenta);
+    }
+  }
+
+  // Cool (green, cyan, blue)
+  .data-set.games {
+    &,
+    &:hover {
+      fill: var(--melange_c_blue);
+      z-index: 1000;
+    }
+  }
+  .data-set.keyboards {
+    &,
+    &:hover {
+      fill: var(--melange_b_cyan);
+    }
+  }
+  .data-set.game_design_course {
+    &,
+    &:hover {
+      fill: var(--melange_c_cyan);
+    }
+  }
+  .data-set.gaming {
+    &,
+    &:hover {
+      fill: var(--melange_b_green);
+    }
+  }
+
+  // Black/white
+  .data-set.yearly_review {
+    &,
+    &:hover {
+      fill: var(--melange_a_fg);
+      cursor: pointer;
+    }
+  }
+  .data-set.fallback {
+    &,
+    &:hover {
+      fill: var(--melange_a_ui);
+    }
+  }
+  .data-set:hover {
+    circle {
+      r: 5px;
+    }
+
+    .data-set-label {
+      /* font-size: 1.1rem; */
+      font-weight: bold;
+    }
+  }
+
+  .data-1 {
+    fill: var(--melange_b_green);
+    stroke-width: 1;
+  }
+  .data-2 {
+    fill: var(--melange_b_magenta);
+    stroke-width: 1;
+  }
+  .data-1:hover {
+    fill: red;
+  }
+  .data-2:has(foreignObject input:checked) {
+    fill: blue;
+  }
+}

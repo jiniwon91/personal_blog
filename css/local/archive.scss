@@ -1,0 +1,43 @@
+@use "../components/highlight" as *;
+@use "../global/font_size" as *;
+@use "../global/fonts" as *;
+
+article.archive {
+  h1 > * {
+    @include large-underline-highlight(var(--color-highlight-archive));
+  }
+  .title-wrapper h1 > * {
+    @include large-underline-highlight(var(--color-highlight-tags));
+  }
+
+  .title-wrapper > .pre-title {
+    @include sans-serif;
+    @include font-size("s");
+    color: var(--color-highlight-archive);
+  }
+
+  .title-wrapper .post-count {
+    color: var(--melange_a_ui);
+  }
+
+  .title-wrapper h1 {
+    margin-block-start: 0;
+  }
+
+  h1 {
+    margin-block-end: var(--space-xs);
+    line-height: 1.3;
+  }
+
+  .favorite-descr {
+    margin-block-end: var(--space-xs);
+
+    .favorite {
+      display: inline-block;
+      position: relative;
+      top: -2px;
+      vertical-align: baseline;
+      color: var(--color-highlight-favorite);
+    }
+  }
+}

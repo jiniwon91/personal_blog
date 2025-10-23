@@ -1,0 +1,45 @@
+{% import "post_info.html" as macros %} {% extends "site.html" %} {% block
+content %}
+<div class="homepage">
+  <article class="homepage-hello">
+    <p>
+    Hi! I'm <strong>VINCHA</strong>, a DJ, developer and sekai ichi no jazz player ni naru. (joking).
+      <br />
+      <br>
+      <a href="mailto:{{mail}}">Say hello</a>, or keep reading. Kam-sa-Ham-ni-Da.
+    </p>
+  </article>
+
+  <article class="homepage-posts">
+    <h1 class="section-title"><a href="/archive">Posts</a></h1>
+
+    <hr class="recent" />
+
+    {{ macros::post_items(posts=recent) }}
+
+    <hr class="featured" />
+
+    {{ macros::post_items(posts=recommended) }}
+
+    <nav>
+      <a href="/archive">See more posts</a>
+    </nav>
+  </article>
+
+  <article class="series">
+    <h1 class="section-title"><a href="/series">Series</a></h1>
+
+    {% include "series_info.html" %}
+  </article>
+
+  <article class="projects">
+    <h1 class="section-title"><a href="/projects">Projects</a></h1>
+
+    {% include "project_info.html" %} {% include "games.html" %}
+
+    <nav>
+      <a href="/projects">See more projects</a>
+    </nav>
+  </article>
+</div>
+{% endblock content %}

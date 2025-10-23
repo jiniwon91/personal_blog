@@ -1,0 +1,37 @@
+@use "melange" as *;
+@use "gruvbox" as *;
+
+:root {
+  --color-text: var(--melange_a_fg);
+  --color-link: var(--melange_b_blue);
+  --color-link-error: var(--melange_c_red);
+  --color-link-hover: var(--melange_b_yellow);
+  --color-background: var(--melange_a_bg);
+  --color-footer-background: var(--melange_a_float);
+
+  --color-hr: var(--melange_a_ui);
+  --color-footnote-def: var(--melange_a_com);
+  --color-highlight: var(--melange_b_red);
+  --color-blockquote-bar: var(--color-highlight);
+  --color-list-bullet: var(--color-highlight);
+  --color-tags: var(--melange_b_cyan);
+  --color-tags-hover: var(--melange_b_yellow);
+
+  --color-highlight-archive: var(--melange_d_yellow);
+  --color-highlight-tags: var(--melange_c_cyan);
+  --color-highlight-series: var(--melange_b_red);
+  --color-highlight-projects: var(--melange_c_cyan);
+  --color-highlight-about: var(--melange_c_magenta);
+  --color-highlight-drafts: var(--color-highlight-archive);
+  --color-highlight-favorite: var(--melange_c_yellow);
+
+  --color-series-completed: var(--melange_c_blue);
+  --color-series-ongoing: var(--melange_c_red);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    // I did not really like the dark float for the site footer.
+    --color-footer-background: #1d1c19;
+  }
+}

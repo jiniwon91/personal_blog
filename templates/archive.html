@@ -1,0 +1,31 @@
+{% import "post_info.html" as macros %}
+{% extends "site.html" %}
+{% block content %}
+<article class="archive">
+  <div class="title-wrapper">
+    <div class="pre-title">
+      <span class="count">{{ posts | length }}</span>
+      {% if posts | length == 1 %}
+        post
+      {% else %}
+        posts
+      {% endif %}
+
+    {% if tag_filter %}
+      tagged
+    {% else %}
+      in
+    {% endif %}
+    </div>
+    <h1><span>{{ title }}</span></h1>
+  </div>
+
+  {% if url == "/blog" %}
+  <div class="favorite-descr">
+    My <a href="/favorite">favorite posts</a> are marked with a <span class="favorite">★</span>.
+  </div>
+  {% endif %}
+
+  {{ macros::post_items(posts=posts) }}
+</article>
+{% endblock content %}

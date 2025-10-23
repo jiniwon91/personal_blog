@@ -1,0 +1,20 @@
+{% import "post_info.html" as macros %} {% extends "site.html" %} {% block
+content %}
+<article class="series-archive">
+  <header>
+    <h1>Series</h1>
+  </header>
+
+  <section class="descr">
+    <p>
+      Series are form of long-form content that outgrew the size of a post and
+      that forms a more structured story compared to
+      <a href="/blog/tags">tags</a>. They're a collection of posts, sometimes
+      planned for in advance but other times the series materialized after a
+      couple of posts.
+    </p>
+  </section>
+
+  {% include "series_info.html" %}
+</article>
+{% endblock content %}

@@ -1,0 +1,19 @@
+{% import "post_info.html" as macros %}
+{% extends "site.html" %}
+{% block content %}
+<article class="static">
+  <header>
+    <h1>{{title}}</h1>
+    {% if latest_commit %}
+      <div class="post-info">
+        <div class="revised">
+          <span class="item-spec">Updated:</span>
+          {{ macros::post_date(dt=latest_commit.dt, link_year=0) }} in {{ macros::rev_link(commit=latest_commit) }}
+        </div>
+      </div>
+    {% endif %}
+  </header>
+
+  {{content}}
+</article>
+{% endblock content %}

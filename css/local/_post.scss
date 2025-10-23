@@ -1,0 +1,79 @@
+@use "../global/spacing" as *;
+@use "../global/font_size" as *;
+@use "../global/fonts" as *;
+@use "../components/system" as *;
+@use "../components/highlight" as *;
+
+article.post {
+  .post-series-footer,
+  .post-series-head {
+    background-color: var(--melange_a_float);
+    padding: var(--space-xs);
+    @include flow(var(--space-3xs));
+    border: 1px dashed var(--melange_c_red);
+  }
+
+  .post-series-footer .posts {
+    margin-block: var(--space-s);
+
+    .current a {
+      color: var(--melange_c_red);
+    }
+    .current a:hover {
+      color: var(--color-link-hover);
+    }
+
+    ol > li::before {
+      color: var(--melange_a_com);
+    }
+    .current-marker {
+      color: var(--melange_a_com);
+      margin-left: var(--space-3xs);
+    }
+  }
+
+  .post-footer {
+    margin-top: var(--space-m);
+    border-top: 1px solid var(--color-hr);
+  }
+
+  .post-footer .post-info {
+    margin-block-start: var(--space-2xs);
+    justify-content: center;
+  }
+  .post-footer .post-nav {
+    @include sans-serif;
+    @include font-size("s");
+    display: flex;
+    justify-content: space-between;
+    margin-block-start: var(--space-2xs);
+  }
+
+  header {
+    @include overflow-bleed-right;
+  }
+
+  header > h2.series {
+    @include large-link-underline-highlight(var(--color-highlight-series));
+    margin-block-end: var(--space-xs);
+    & > a {
+      @include font-size("l");
+    }
+  }
+  header > h1 a:hover {
+    text-decoration: none;
+  }
+
+  .ok {
+    font-style: italic;
+    color: var(--melange_b_green);
+  }
+  .partly {
+    font-style: italic;
+    color: var(--melange_b_yellow);
+  }
+  .failed {
+    font-style: italic;
+    color: var(--melange_b_red);
+  }
+}

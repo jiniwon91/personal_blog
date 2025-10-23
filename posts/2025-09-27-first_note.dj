@@ -1,0 +1,25 @@
+---toml
+title = "First Note"
+tags = ["BlueGiant", "blog"]
+series = "life"
+favorite = true
+recommended = false
+---
+
+# First Note
+
+안녕하세요. First Note입니다.
+
+'블로그를 만들어보겠다'하고 야심차게 시작했지만 시행착오를 많이 했습니다. 쉽지 않네요.
+ 
+First Note는 제가 최근에 본 영화 '블루자이언트'에 나오는 곡의 이름입니다. JASS의 피아니스트가 팀 결성 후 처음으로 만든 자작곡이죠. 블루자이언트 얘기도 여기 나올거라 블로그 첫 글의 제목으로 적합하다고 생각했습니다.
+
+{ #1 }
+## Blue Giant
+
+
+:table-of-content:
+
+{ #sorry }
+## Sorry
+

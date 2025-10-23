@@ -1,0 +1,11 @@
+{% extends "site.html" %} {% block content %}
+<article class="tags-list">
+  <h1><span>{{title}}</span></h1>
+
+  <div class="tags">
+    {% for tag in tags %}
+    <a class="tag" href="{{tag.href}}">{{tag.name}} ({{tag.num_posts}})</a>
+    {% endfor %}
+  </div>
+</article>
+{% endblock content %}

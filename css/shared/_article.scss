@@ -1,0 +1,893 @@
+@use "../global/fonts" as *;
+@use "../global/font_size" as *;
+@use "../global/melange" as *;
+@use "../global/spacing" as *;
+@use "../components/system" as *;
+
+article {
+  @include full-bleed-wrapper;
+
+  section {
+    @include full-bleed;
+    @include full-bleed-wrapper;
+  }
+
+  /*
+   * General setup
+   */
+  a {
+    word-wrap: break-word;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  h7 {
+    & > a:not(:first-of-type) {
+      text-decoration: underline;
+    }
+
+    &:not(:first-child) {
+      margin-block-start: var(--space-xs);
+    }
+  }
+
+  h1 .favorite {
+    display: inline-block;
+    position: relative;
+    top: -3px;
+    vertical-align: baseline;
+
+    &,
+    a {
+      color: var(--color-highlight-favorite);
+    }
+
+    a:hover {
+      color: var(--color-link-hover);
+    }
+  }
+
+  span.favorite {
+    display: inline-block;
+    position: relative;
+    top: -2px;
+    vertical-align: baseline;
+
+    &,
+    a {
+      color: var(--color-highlight-favorite);
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: var(--color-link-hover);
+    }
+  }
+
+  // All headers are wrapped in sections in Djot,
+  // so the margin on the `:not(:first-child)` headers will never happen.
+  // Remove `--flow-space` because it will be introduced from `@include flow`
+  // in wrapping articles and other sections.
+  section > :is(h1, h2, h3, h4, h5, h6, h7):first-child {
+    margin-block-start: calc(var(--space-m) - var(--flow-space));
+  }
+
+  .post-info,
+  .series-info {
+    @include sans-serif;
+    @include font-size("s");
+    gap: var(--space-3xs) var(--space-2xs);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: left;
+    align-items: baseline;
+    margin-block-start: var(--space-3xs);
+  }
+
+  .post-info .draft {
+    color: var(--color-highlight);
+    color: var(--melange_b_red);
+    text-decoration: underline;
+    margin-right: -2px;
+  }
+
+  .post-info .item-spec {
+    color: var(--melange_a_ui);
+  }
+
+  time a {
+    text-decoration: underline;
+    color: var(--color-text);
+  }
+
+  time a:hover {
+    text-decoration: underline;
+    color: var(--color-link-hover);
+  }
+
+  .tag-links {
+    @include sans-serif;
+    @include font-size("s");
+  }
+
+  .tag-links a {
+    color: var(--color-tags);
+  }
+
+  .tag-links a:hover {
+    color: var(--color-tags-hover);
+  }
+
+  a:not([href]) {
+    color: var(--color-link-error);
+  }
+
+  /*
+   * Code
+   */
+  pre,
+  code {
+    font-family: $code-font-family;
+    // Try to make the fonts have a similar size...
+    font-size: var(--font-size-m-code);
+  }
+
+  pre code {
+    padding: 0;
+    width: 100%;
+  }
+
+  .code-wrapper.wide {
+    @include overflow-bleed;
+  }
+
+  // pre.wide {
+  //   @include overflow-bleed;
+  // }
+  pre code > .line {
+    padding-inline: var(--space-xs);
+  }
+
+  pre {
+    padding-block: var(--space-xs);
+    overflow-wrap: normal;
+    overflow: auto;
+  }
+
+  code {
+    padding: 0.2rem;
+    margin: 0;
+  }
+
+  /*
+   * Quotes
+   */
+  blockquote {
+    font-size: 95%;
+    padding-inline-start: var(--space-m);
+    padding-block: var(--space-2xs);
+    @include flow;
+  }
+
+  & blockquote {
+    border-left: 3px solid var(--color-blockquote-bar);
+  }
+
+  .epigraph {
+    margin-block: var(--space-m);
+    font-style: italic;
+
+    > blockquote {
+      border-left: 0px;
+    }
+  }
+
+  blockquote > footer {
+    font-size: 80%;
+    text-align: right;
+  }
+
+  /*
+   * Tables
+   */
+  table {
+    @include serif;
+    // Need tabular numbers to align properly
+    font-feature-settings:
+      "kern" on,
+      "tnum" on;
+  }
+
+  th,
+  td {
+    padding: var(--space-3xs) var(--space-s) var(--space-3xs) 0;
+  }
+
+  // This is just for one single post
+  table.movie-table {
+    width: 100%;
+
+    td:first-of-type {
+      width: 25ch;
+    }
+  }
+
+  table.center {
+    margin: 0 auto;
+  }
+
+  /*
+   * Horizontal rules
+   */
+  hr {
+    // Remove article based spacing
+    @include extra-space-m;
+  }
+
+  /*
+   * Lists
+   */
+  // Consistent spacing between items
+  // Narrow lists don't have paragraphs in them
+  :is(ol, ul):not(:has(p)) {
+    @include flow(var(--space-2xs));
+  }
+
+  :is(ol, ul):has(p) {
+    @include flow(var(--space-xs));
+  }
+
+  // Consistent spacing inside items
+  li {
+    @include flow();
+  }
+
+  // Replace standard item bullets/numbers with our own
+  // and add in some spacing.
+  ul,
+  ol {
+    list-style: none;
+    margin-left: var(--space-m);
+  }
+
+  ol {
+    counter-reset: ordered-counter;
+  }
+
+  // Nudge lists together so we can display `-` and `+` items as if they're the same list.
+  div:is(.plus, .dash) ~ div:is(.plus, .dash) {
+    margin-top: calc(-0.5 * var(--space-2xs));
+  }
+
+  :is(ol, ul) > li::before {
+    float: left;
+    margin-left: calc(-1 * var(--space-m));
+    color: var(--color-list-bullet);
+  }
+
+  ol > li::before {
+    @include sans-serif;
+    counter-increment: ordered-counter;
+    content: counter(ordered-counter);
+  }
+
+  ol[type="A" s] > li::before {
+    content: counter(ordered-counter, upper-alpha);
+  }
+
+  ol[type="a" s] > li::before {
+    content: counter(ordered-counter, lower-alpha);
+  }
+
+  ol[type="I" s] > li::before {
+    content: counter(ordered-counter, upper-roman);
+  }
+
+  ol[type="i" s] > li::before {
+    content: counter(ordered-counter, lower-roman);
+  }
+
+  .greek ol[type="a" s] > li::before {
+    content: counter(ordered-counter, lower-greek);
+  }
+
+  ul > li::before {
+    @include sans-serif;
+    content: "•";
+  }
+
+  .dash ul > li::before {
+    content: "-";
+  }
+
+  .plus ul > li::before {
+    content: "+";
+  }
+
+  ul > li.checked::before {
+    @include sans-serif;
+    content: "[×]";
+  }
+
+  ul > li.unchecked::before {
+    @include sans-serif;
+    content: "[ ]";
+  }
+
+  .toc {
+    padding-block-start: var(--space-2xs);
+    padding-block-end: var(--space-2xs);
+    border-width: 0;
+    border-top-width: 1px;
+    border-bottom-width: 1px;
+    border-style: solid;
+    border-color: var(--color-hr);
+
+    nav {
+      margin: var(--space-2xs) var(--space-s);
+      --flow-space: 0;
+    }
+
+    ol {
+      @include flow(var(--space-3xs));
+      margin-left: 0;
+    }
+
+    ol > li:before {
+      margin-left: 0;
+      content: none;
+    }
+
+    a {
+      @include sans-serif;
+    }
+
+    summary:hover {
+      cursor: pointer;
+      color: var(--color-link-hover);
+      text-decoration: underline;
+    }
+
+    a:link,
+    a:visited {
+      color: var(--color-text);
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: var(--color-link-hover);
+      text-decoration: underline;
+    }
+
+    a.heading-1 {
+      font-weight: bold;
+    }
+
+    a.heading-2 {
+      margin-left: var(--space-xs);
+      font-size: 90%;
+    }
+  }
+
+  // Special case of removing spacing between table of content
+  // directly preceding a heading.
+  .toc:not(:first-child) ~ section > h2:first-child {
+    margin-block-start: var(--space-xs);
+  }
+
+  .toc:first-child ~ section > h2:first-child {
+    margin-block-start: 0;
+  }
+
+  /*
+   * Images
+   */
+  img,
+  svg {
+    max-width: 100%;
+  }
+
+  figure svg {
+    width: 100%;
+  }
+
+  // This little beauty is here because once upon a time I was dumb,
+  // and created some svg files with transparent backgrounds.
+  // It's not great on a dark background when all text is also dark.
+  // FIXME should be more explicit to only target those svg files
+  @media (prefers-color-scheme: dark) {
+    img:not(.play-button) {
+      background-color: $melange_light_a_bg;
+    }
+  }
+
+  figure figcaption {
+    overflow-wrap: break-word;
+  }
+
+  figure {
+    @include overflow-bleed;
+    text-align: center;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+
+    &:not(:is(.flex-50, .flex-33, .flex-25, .flex-20)) {
+      gap: var(--space-3xs);
+    }
+
+    figcaption {
+      font-style: italic;
+      width: 100%;
+    }
+  }
+
+  // Multiple images share the same line and automatically flexes.
+  // Caption is below and everything is centered.
+  figure.flex-50,
+  figure.flex-33,
+  figure.flex-25,
+  figure.flex-20 {
+    & > * {
+      padding-inline: 0.1em;
+    }
+
+    img {
+      // Padding combined with background doesn't mesh well at all
+      background-color: none;
+    }
+  }
+
+  figure.flex-50 a,
+  figure.flex-50 img {
+    flex: 0 1 50%;
+  }
+
+  figure.flex-33 a,
+  figure.flex-33 img {
+    flex: 0 1 33%;
+  }
+
+  figure.flex-25 a,
+  figure.flex-25 img {
+    flex: 0 1 25%;
+  }
+
+  figure.flex-20 a,
+  figure.flex-20 img {
+    flex: 0 1 20%;
+  }
+
+  figure.gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: var(--space-3xs);
+  }
+
+  figure.gallery > figcaption {
+    grid-column: 1 / -1 !important;
+    max-inline-size: none;
+    display: flex;
+    justify-content: center;
+  }
+
+  /*
+   * Aside/notice
+   */
+  aside {
+    @include flow;
+    font-size: 95%;
+
+    padding-inline-start: var(--space-m);
+    padding-block-start: var(--space-3xs);
+    padding-block-end: var(--space-2xs);
+    display: flex;
+    flex-direction: column;
+    border-width: 0;
+    border-left-width: 3px;
+    border-style: solid;
+
+    &::before {
+      @include sans-serif;
+      margin-block-end: var(--space-2xs);
+    }
+  }
+
+  aside.note {
+    border-color: var(--melange_b_blue);
+
+    &::before {
+      content: "Note";
+      color: var(--melange_b_blue);
+    }
+  }
+
+  aside.tip {
+    border-color: var(--melange_b_green);
+
+    &::before {
+      content: "Tip";
+      color: var(--melange_b_green);
+    }
+  }
+
+  aside.warn {
+    border-color: var(--melange_b_yellow);
+
+    &::before {
+      content: "Warning";
+      color: var(--melange_b_yellow);
+    }
+  }
+
+  aside.important {
+    border-color: var(--melange_b_magenta);
+
+    &::before {
+      content: "Important";
+      color: var(--melange_b_magenta);
+    }
+  }
+
+  aside.update {
+    border-color: var(--melange_c_cyan);
+
+    .info {
+      color: var(--melange_b_cyan);
+
+      .date {
+        margin-left: var(--space-3xs);
+        @include sans-serif;
+        font-size: 90%;
+        color: var(--melange_c_cyan);
+      }
+    }
+  }
+
+  /*
+   * todo comments
+   */
+  span.todo,
+  span.fixme,
+  span.note {
+    color: var(--melange_a_bg);
+    padding: var(--space-3xs);
+  }
+
+  span.todo {
+    background-color: var(--melange_c_blue);
+  }
+
+  span.fixme {
+    background-color: var(--melange_c_red);
+  }
+
+  span.note {
+    background-color: var(--melange_c_cyan);
+  }
+
+  mark {
+    background-color: var(--color-background);
+    font-weight: bold;
+    color: var(--melange_b_yellow);
+  }
+
+  /*
+   * YouTube embedding with thumbnail + link instead of iframe.
+   */
+  .yt-wrapper {
+    @include overflow-bleed;
+    --measure: 100%;
+    margin-top: var(--space-2xs);
+    display: flex;
+    justify-content: center;
+    position: relative;
+  }
+
+  .yt-container {
+    a {
+      color: var(--melange_a_com);
+      color: var(--melange_a_fg);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+      color: var(--color-link-hover);
+    }
+
+    .yt-overlay {
+      position: absolute;
+      display: inline-block;
+      width: 100%;
+      left: 0;
+      top: calc(50% + 24px + 1ch);
+      display: flex;
+      justify-content: center;
+      @include sans-serif;
+
+      span {
+        display: inline-block;
+        padding-inline: var(--space-3xs);
+        color: $melange_dark_a_fg;
+        background-color: rgba($melange_dark_a_bg, 0.8);
+      }
+    }
+
+    .play-button {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 64px;
+      height: 48px;
+      margin-left: -34px;
+      margin-top: -24px;
+
+      path.background {
+        fill: $melange_dark_a_sel;
+      }
+
+      path.arrow {
+        fill: $melange_dark_a_fg;
+      }
+    }
+
+    &:hover {
+      .play-button path.background {
+        fill: $melange_light_b_red;
+      }
+
+      .yt-overlay span {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  /*
+   * Footnotes
+   */
+  a[role="doc-noteref"],
+  a[role="doc-backlink"] {
+    &:link {
+      text-decoration: none;
+    }
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  a[role="doc-backlink"] {
+    padding-left: var(--space-3xs);
+  }
+
+  section[role="doc-endnotes"] {
+    > hr {
+      overflow: visible;
+      text-align: center;
+      margin: 0;
+    }
+
+    > hr:after {
+      @include sans-serif;
+      @include font-size("s");
+      color: var(--color-footnote-def);
+      position: relative;
+      top: 1.4ch;
+      padding: 0 var(--space-3xs);
+      background-color: var(--color-background);
+      content: "Notes";
+    }
+
+    :is(ol, ul) > li::before {
+      color: var(--color-footnote-def);
+    }
+  }
+
+  /*
+   * Changelog
+   */
+  section.changelog {
+    > hr {
+      overflow: visible;
+      text-align: center;
+      margin: 0;
+    }
+
+    > hr:after {
+      @include sans-serif;
+      @include font-size("s");
+      color: var(--color-footnote-def);
+      position: relative;
+      top: 1.4ch;
+      padding: 0 var(--space-3xs);
+      background-color: var(--color-background);
+      content: "Changelog";
+    }
+
+    :is(ol, ul) > li::before {
+      color: var(--color-footnote-def);
+    }
+
+    .item time {
+      @include sans-serif;
+    }
+
+    .item .description {
+      display: grid;
+      row-gap: var(--flow-space);
+    }
+  }
+}
+
+.timeline .events {
+  display: flex;
+  flex-direction: column;
+  row-gap: var(--space-xs);
+  position: relative;
+  margin: var(--space-2xs);
+
+  // Horizontal line.
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 1px;
+    background: var(--color-hr);
+  }
+
+  .event {
+    display: flex;
+    align-items: baseline;
+  }
+
+  .event .marker {
+    fill: var(--color-hr);
+    order: 0;
+    position: relative;
+    left: -6px;
+    flex-shrink: 0;
+  }
+
+  .content .text {
+    display: flex;
+    flex-direction: column;
+    row-gap: var(--flow-space);
+  }
+
+  .content time {
+    @include sans-serif;
+    font-weight: bold;
+  }
+
+  .event:is(.family) .marker {
+    fill: var(--melange_b_red);
+  }
+  .event:is(.life) .marker {
+    fill: var(--melange_b_yellow);
+  }
+  .event:is(.hobbies) .marker {
+    fill: var(--melange_c_yellow);
+  }
+  .event:is(.projects) .marker {
+    fill: var(--melange_b_blue);
+  }
+  .event:is(.work) .marker {
+    fill: var(--melange_b_green);
+  }
+  .event:is(.programming) .marker {
+    fill: var(--melange_b_magenta);
+  }
+
+  .event:is(.smartwatch) .marker {
+    fill: var(--melange_b_blue);
+  }
+  .event:is(.smartband) .marker {
+    fill: var(--melange_b_cyan);
+  }
+  .event:is(.oura) .marker {
+    fill: var(--melange_b_yellow);
+  }
+  .event:is(.whoop) .marker {
+    fill: var(--melange_c_yellow);
+  }
+  .event:is(.eightsleep) .marker {
+    fill: var(--melange_b_magenta);
+  }
+  .event:is(.hrtracker) .marker {
+    fill: var(--melange_b_red);
+  }
+  .event:is(.withings) .marker {
+    fill: var(--melange_b_green);
+  }
+}
+.timeline.blog-tech-stack {
+  .event.kohana .marker {
+    fill: var(--melange_c_green);
+  }
+  .event.mojolicious .marker {
+    fill: var(--melange_c_blue);
+  }
+  .event.jekyll .marker {
+    fill: var(--melange_c_yellow);
+  }
+  .event:is(.hakyll, .hakyll-space) .marker {
+    fill: var(--melange_c_magenta);
+  }
+  .event.rust .marker {
+    fill: var(--melange_b_red);
+  }
+  .event.git .marker {
+    fill: var(--melange_b_green);
+  }
+  .event.css .marker {
+    fill: var(--melange_b_blue);
+  }
+  .event.djot .marker {
+    fill: var(--melange_b_cyan);
+  }
+  .event.neovim .marker {
+    fill: var(--melange_b_yellow);
+  }
+}
+
+// Cutoff when we place the timeline in the middle and move some
+// events to the left side.
+@media (min-width: 700px) {
+  // Expand the available area a bit.
+  .timeline {
+    @include overflow-bleed;
+  }
+
+  .timeline .events {
+    // Place the horizontal line in the middle.
+    &::before {
+      left: 50%;
+    }
+
+    // Move marker to the middle.
+    .event .marker {
+      order: 1;
+    }
+
+    .event .content {
+      // All content on one side (this is the left).
+      width: 50%;
+      text-align: right;
+      padding-inline: var(--space-xs);
+    }
+  }
+
+  // Aligned to the right.
+  .timeline
+    .events
+    .event:is(
+      .programming,
+      .work,
+      .projects,
+      .fitnessdevice,
+      .oura,
+      .whoop,
+      .eightsleep,
+      .hrtracker
+    ),
+  .timeline.blog-tech-stack .events .event:nth-child(even) {
+    // This is enough to move everything over to the side.
+    flex-direction: row-reverse;
+
+    .marker {
+      left: 6px;
+    }
+
+    .content {
+      text-align: left;
+    }
+  }
+}

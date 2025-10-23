@@ -1,0 +1,13 @@
+{% extends "site.html" %} {% block content %}
+<article class="projects">
+  <header>
+    <h1>{{ title }}</h1>
+  </header>
+
+  <div class="intro">
+    <div class="content">{{ prematter }}</div>
+  </div>
+
+  {% include "project_info.html" %} {% include "games.html" %}
+</article>
+{% endblock content %}

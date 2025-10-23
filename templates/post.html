@@ -1,0 +1,85 @@
+{% import "post_info.html" as macros %}
+{% extends "site.html" %}
+{% block content %}
+<article class="post">
+  <header>
+    {% if series %}
+    <h2 class="series">
+      <a href="{{series.url}}" title="{{series.title}} series"
+        >{{series.title}}</a
+      >
+    </h2>
+    {% endif %}
+    <h1>
+      {{ macros::post_title(url=url, title=title, favorite=favorite) }}
+    </h1>
+    {{ macros::post_info_long(created=created, latest_commit=latest_commit, tags=tags, is_draft=is_draft) }}
+  </header>
+
+  {% if series %}
+  <div class="post-series post-series-head">
+    <div>
+      This is part {{series.part_number}} of the
+      <a href="{{series.url}}">{{series.title}}</a> series.
+    </div>
+
+    <div>{{series.post_note}}</div>
+  </div>
+  {% endif %}
+  {{content}}
+  {% if series %}
+  <div class="post-series post-series-footer">
+    <div>
+      {% if series.last_part %} This is the last part of the
+      <a href="{{series.url}}">{{series.title}}</a> series. {% else %} This is
+      part {{series.part_number}} of the
+      <a href="{{series.url}}">{{series.title}}</a> series. {% endif %}
+    </div>
+
+    <nav class="posts">
+      <ol>
+      {% for post in series.posts %}
+        {% set current = url == post.url %}
+        <li {% if current %}class="current"{% endif %}>
+          <a href="{{post.url}}">{{post.title}}</a>
+          {% if current %}<span class="current-marker">←</span>{% endif %}
+        </li>
+      {% endfor %}
+      </ol>
+    </nav>
+
+    {% if not series.next_url %}
+    <div>
+      {% if series.completed %} This series is completed. {% else %} This series
+      is ongoing. {% endif %}
+    </div>
+    {% endif %}
+
+    <div>
+      {% if series.next_url %}
+      <a href="{{series.next_url}}">Read the next part</a>
+      {% else %}
+      <a href="/series">View all series</a>
+      {% endif %}
+    </div>
+  </div>
+  {% endif %}
+
+  <div class="post-footer">
+    {{ macros::post_info_long(created=created, latest_commit=latest_commit, tags=tags, is_draft=is_draft) }}
+
+    <nav class="post-nav">
+      <span class="prev">
+        {% if prev %}
+        <a href="{{ prev.url }}" title="{{ prev.title }}">Previous</a>
+        {% endif %}
+      </span>
+      <span class="next">
+        {% if next %}
+        <a href="{{ next.url }}" title="{{ next.title }}">Next</a>
+        {% endif %}
+      </span>
+    </nav>
+  </div>
+</article>
+{% endblock content %}

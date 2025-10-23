@@ -1,0 +1,59 @@
+// Inspired by https://www.joshwcomeau.com/css/full-bleed/
+// Limits a center div to `--measure`, but allow a full-bleed to extend to edges.
+// Also supports an overflow-bleed, that will extend past the edges specified
+// by `--overflow-measure`
+@mixin full-bleed-wrapper {
+  display: grid;
+  grid-template-columns:
+    1fr
+    minmax(0, var(--overflow-size)) min(var(--measure), 100%) minmax(
+      0,
+      var(--overflow-size)
+    )
+    1fr;
+  max-inline-size: none;
+  row-gap: var(--flow-space);
+
+  & > * {
+    grid-column: 3;
+  }
+}
+@mixin full-bleed {
+  width: 100%;
+  grid-column: 1 / -1 !important;
+  max-inline-size: none;
+}
+@mixin overflow-bleed {
+  width: 100%;
+  grid-column: 2 / 5 !important;
+  max-inline-size: none;
+}
+@mixin overflow-bleed-right {
+  width: 100%;
+  grid-column: 3 / 5 !important;
+  max-inline-size: none;
+}
+
+@mixin extra-space-s {
+  margin: var(--space-s) 0 calc(var(--space-s) - var(--space-xs)) 0;
+}
+@mixin extra-space-m {
+  margin: var(--space-m) 0 calc(var(--space-m) - var(--space-xs)) 0;
+}
+
+@mixin flow($space: false) {
+  & > * + * {
+    margin-block-start: var(--flow-space);
+    @if $space {
+      --flow-space: #{$space};
+    }
+  }
+}
+@mixin hflow($space: false) {
+  & > * + * {
+    margin-inline-start: var(--flow-hspace);
+    @if $space {
+      --flow-hspace: #{$space};
+    }
+  }
+}

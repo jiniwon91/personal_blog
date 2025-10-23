@@ -1,0 +1,110 @@
+@font-face {
+  font-family: century_supra_a;
+  font-style: normal;
+  font-weight: normal;
+  font-stretch: normal;
+  font-display: auto;
+  src: url("/fonts/century_supra_a_regular.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: century_supra_a;
+  font-style: italic;
+  font-weight: normal;
+  font-stretch: normal;
+  font-display: auto;
+  src: url("/fonts/century_supra_a_italic.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: century_supra_a;
+  font-style: normal;
+  font-weight: bold;
+  font-stretch: normal;
+  font-display: auto;
+  src: url("/fonts/century_supra_a_bold.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: century_supra_a;
+  font-style: italic;
+  font-weight: bold;
+  font-stretch: normal;
+  font-display: auto;
+  src: url("/fonts/century_supra_a_bold_italic.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: concourse_4;
+  font-style: normal;
+  font-weight: normal;
+  font-stretch: normal;
+  font-display: auto;
+  src: url("/fonts/concourse_4_regular.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: concourse_4;
+  font-style: italic;
+  font-weight: normal;
+  font-stretch: normal;
+  font-display: auto;
+  src: url("/fonts/concourse_4_italic.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: concourse_4;
+  font-style: normal;
+  font-weight: bold;
+  font-stretch: normal;
+  font-display: auto;
+  src: url("/fonts/concourse_4_bold.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: concourse_4;
+  font-style: italic;
+  font-weight: bold;
+  font-stretch: normal;
+  font-display: auto;
+  src: url("/fonts/concourse_4_bold_italic.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: iosevka_tree;
+  src: url("/fonts/iosevka-tree-regular.woff2") format("woff2");
+  font-style: normal;
+}
+@font-face {
+  font-family: iosevka_tree;
+  src: url("/fonts/iosevka-tree-italic.woff2") format("woff2");
+  font-style: italic;
+}
+@font-face {
+  font-family: iosevka_tree;
+  src: url("/fonts/iosevka-tree-bold.woff2") format("woff2");
+  font-style: normal;
+  font-weight: bold;
+}
+@font-face {
+  font-family: iosevka_tree;
+  src: url("/fonts/iosevka-tree-bolditalic.woff2") format("woff2");
+  font-style: italic;
+  font-weight: bold;
+}
+
+$serif-font-family: century_supra_a, Georgia, serif;
+$sans-serif-font-family: concourse_4, Helvetica, sans-serif;
+$code-font-family: iosevka_tree, monospace;
+
+@mixin sans-serif {
+  text-rendering: optimizeLegibility;
+  font-family: $sans-serif-font-family;
+  font-feature-settings: "ss06" on, "onum" off, "kern" on;
+}
+
+@mixin serif {
+  text-rendering: optimizeLegibility;
+  font-family: $serif-font-family;
+  font-feature-settings: "kern" on;
+}

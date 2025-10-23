@@ -1,0 +1,88 @@
+{% import "highlight.html" as highlight %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Winter is coming!: {{title}}</title>
+    <link rel="stylesheet" type="text/css" href="/css/main.css" />
+    {% if include_js %}
+    <script type="text/javascript" src="/js/main.js"></script>
+    {% endif %}
+    <link
+      rel="alternate"
+      type="application/atom+xml"
+      title="Atom 0.3"
+      href="/feed.xml"
+    />
+    <meta
+      name="keywords"
+      content="{% for keyword in meta_keywords %}{% if loop.index0 > 0 %}, {% endif %}{{ keyword }}{% endfor %}"
+    />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
+    />
+    <meta name="author" content="vincha" />
+  </head>
+
+  <body>
+    <div class="main-content">
+      <header class="site-header">
+        <div class="nav-wrapper">
+          <span class="site-title"><a href="/">~winter's.coming!</a></span>
+          <nav>
+            <ul>
+              {{ highlight::a_highlight(href="/archive", name="Archive") }}
+              {{ highlight::a_highlight(href="/series", name="Series") }}
+              {{ highlight::a_highlight(href="/projects", name="Projects") }}
+              {{ highlight::a_highlight(href= "mailto:" ~ mail, name="Contact") }}
+              {{ highlight::a_highlight(href="/about", name="About") }}
+              {% if include_drafts %}
+                {{ highlight::a_highlight(href="/drafts", name="Drafts") }}
+              {% endif %}
+            </ul>
+          </nav>
+        </div>
+      </header>
+
+      {% block content %}{% endblock content %}
+    </div>
+
+    <footer>
+      <div class="upper">
+        <nav>
+          <ul>
+            <!-- Blog -->
+            <li><a href="/archive">Archive</a></li>
+            <li><a href="/series">Series</a></li>
+            <li><a href="/blog/tags">Tags</a></li>
+            <li><a href="/favorite">Favorite posts</a></li>
+          </ul>
+        </nav>
+
+        <nav>
+          <ul>
+            <!-- Projects -->
+            <li><a href="/projects">Projects</a></li>
+            <li><a href="https://github.com/jiniwon91">GitHub</a></li>
+            <li><a href="/uses">Uses</a></li>
+          </ul>
+        </nav>
+
+        <nav>
+          <ul>
+            <!-- Work/about/other -->
+            <li><a href="mailto:{{mail}}">Contact</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/now">Now</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="lower">
+        Check out the
+        <a href="https://github.com/jiniwon91/personal_blog">source code</a> for
+        the site.
+      </div>
+    </footer>
+  </body>
+</html>
