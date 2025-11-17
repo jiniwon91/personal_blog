@@ -1,0 +1,9 @@
+---toml
+title = "First Note"
+event = "Blug Giant"
+event_link = "https://youtu.be/zPaReFxjc0k?si=IdXmNk2e3DwPQaa6"
+url = "/blog/2025/09/27/first_note"
+img = "images/series/flower.jpg"
+published = "2025-09-27"
+homepage = true
+---
